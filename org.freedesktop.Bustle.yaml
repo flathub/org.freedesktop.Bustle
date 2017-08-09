@@ -26,7 +26,8 @@
         "no-debuginfo": true
     },
     "cleanup": [
-        "*.a", "*.h",
+        "*.a",
+        "*.h",
         "/share/man/man?/pcap*",
         "/bin/pcap-config"
     ],
@@ -34,7 +35,9 @@
         # Why not start your day with a 259MB tarball?
         {
             "name": "haskell-platform",
-            "only-arches": ["x86_64"],
+            "only-arches": [
+                "x86_64"
+            ],
             "sources": [
                 {
                     "type": "archive",
@@ -61,7 +64,9 @@
         },
         {
             "name": "haskell-platform",
-            "only-arches": ["i386"],
+            "only-arches": [
+                "i386"
+            ],
             "sources": [
                 {
                     "type": "archive",
@@ -248,7 +253,7 @@
                     "sha256": "d4ecf697d13f14dd1a78c5995f06459bff706fd1ce593d1c02d81667c0207753"
                 }
             ],
-            "build-options":{
+            "build-options": {
                 "prefix": "/usr"
             }
         },
