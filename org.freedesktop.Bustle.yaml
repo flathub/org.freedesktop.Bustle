@@ -1,7 +1,7 @@
 {
     "app-id": "org.freedesktop.Bustle",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.24",
+    "runtime-version": "3.26",
     "sdk": "org.gnome.Sdk",
     # Use writable-sdk to install Haskell Platform to usr rather than app:
     # it's only needed to build Bustle, not to run it. All Haskell libraries
@@ -41,8 +41,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://www.haskell.org/platform/download/8.0.2/haskell-platform-8.0.2-unknown-posix--full-x86_64.tar.gz",
-                    "sha256": "c68a6f278a192d5000e8feefb0e63cef1bd441d02b846029840b98a5fa3ee31a",
+                    "url": "https://haskell.org/platform/download/8.2.1/haskell-platform-8.2.1-unknown-posix--full-x86_64.tar.gz",
+                    "sha256": "bb5629af143e7d257cb1f3710874f2ca17d1090cc6e5c1c2b80003bc37e0b9ec",
                     # there are no leading compoments in this file; so the default of 1 makes tar silently extract no files!
                     "strip-components": 0
                 },
@@ -58,8 +58,8 @@
                 # for UID 0. We know better -- we have permission to write
                 # everywhere -- so patch out this check.
                 "tar -C / -xf hp-usr-local.tar.gz",
-                "patch /usr/local/haskell/ghc-8.0.2-x86_64/bin/activate-hs activate-hs.patch",
-                "/usr/local/haskell/ghc-8.0.2-x86_64/bin/activate-hs --verbose --prefix /usr"
+                "patch /usr/local/haskell/ghc-8.2.1-x86_64/bin/activate-hs activate-hs.patch",
+                "/usr/local/haskell/ghc-8.2.1-x86_64/bin/activate-hs --verbose --prefix /usr"
             ]
         },
         {
@@ -70,8 +70,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://haskell.org/platform/download/8.0.2/haskell-platform-8.0.2-unknown-posix--full-i386.tar.gz",
-                    "sha256": "cf0f4a1b8860a1a93557262cbaf9dccfd2654022dcddecdcd19536ef46de3369",
+                    "url": "https://haskell.org/platform/download/8.2.1/haskell-platform-8.2.1-unknown-posix--full-i386.tar.gz",
+                    "sha256": "1b2a3ec99cd9dfd491253496ee368500b5ff3d039e043158ea51ae3e855719a4",
                     # there are no leading compoments in this file; so the default of 1 makes tar silently extract no files!
                     "strip-components": 0
                 },
@@ -87,8 +87,8 @@
                 # for UID 0. We know better -- we have permission to write
                 # everywhere -- so patch out this check.
                 "tar -C / -xf hp-usr-local.tar.gz",
-                "patch /usr/local/haskell/ghc-8.0.2-i386/bin/activate-hs activate-hs.patch",
-                "/usr/local/haskell/ghc-8.0.2-i386/bin/activate-hs --verbose --prefix /usr"
+                "patch /usr/local/haskell/ghc-8.2.1-i386/bin/activate-hs activate-hs.patch",
+                "/usr/local/haskell/ghc-8.2.1-i386/bin/activate-hs --verbose --prefix /usr"
             ]
         },
 
@@ -125,8 +125,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://hackage.haskell.org/package/hashtables-1.2.1.1/hashtables-1.2.1.1.tar.gz",
-                    "sha256": "227f554a93310645c654254659969b347de3d1bf3d98901dbb5c113ece72e951"
+                    "url": "http://hackage.haskell.org/package/hashtables-1.2.2.1/hashtables-1.2.2.1.tar.gz",
+                    "sha256": "7aad530a9acca57ebe58774876c5a32e13f9c4ea37e80aa50c9be9ca88dcf6bc"
                 },
                 {
                     "type": "file",
@@ -138,7 +138,7 @@
         {
             "name": "haskell-utf8-string",
             "sources": [
-                # latest release doesn't install on HP 8.0.2!
+                # latest release doesn't install on HP 8.2.1!
                 # https://github.com/glguy/utf8-string/issues/21
                 # This is because Hackage allows you to update a new .cabal
                 # without replacing the tarball.
@@ -162,7 +162,7 @@
                     "type": "git",
                     "url": "https://github.com/gtk2hs/gtk2hs",
                     # No tags? Great! Just pick today's HEAD.
-                    "commit": "21d3a12a82756d04066e5e4198b35097012ee65b"
+                    "commit": "f066503df2c6d8d57e06630615d2097741d09d39"
                 },
                 {
                     "type": "file",
@@ -265,15 +265,17 @@
                 {
                     "type": "git",
                     "url": "https://anongit.freedesktop.org/git/bustle.git",
-                    "branch": "bustle-0.6.1",
-                    "commit": "0238156b0a0a76bcbe69c3ef9d0c46c4437bb5f7"
+                    "branch": "bustle-0.6.2",
+                    "commit": "8d28d43e84af1ca8586481b576bf1bcfedc5fea9"
                 }
             ],
             # TODO: get -j in here too
             "buildsystem": "simple",
             "build-commands": [
                 "make install PREFIX=/app DESTDIR=/",
-                "cabal install --prefix=/app --flags=-hgettext"
+                mkdir -p $HOME/.cabal &&
+                touch $HOME/.cabal/config &&
+                cabal install --prefix=/app --flags=-hgettext
             ]
         }
     ]
