@@ -210,6 +210,136 @@
             "no-autogen": true
         },
         {
+            "name": "haskell-uniplate",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://hackage.haskell.org/package/uniplate-1.6.12/uniplate-1.6.12.tar.gz",
+                    "sha256": "fcc60bc6b3f6e925f611646db90e6db9f05286a9363405f844df1dc15572a8b7"
+                },
+                {
+                    "type": "file",
+                    "path": "Makefile"
+                }
+            ],
+            "no-autogen": true
+        },
+        {
+            "name": "haskell-old-locale",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://hackage.haskell.org/package/old-locale-1.0.0.7/old-locale-1.0.0.7.tar.gz",
+                    "sha256": "dbaf8bf6b888fb98845705079296a23c3f40ee2f449df7312f7f7f1de18d7b50"
+                },
+                {
+                    "type": "file",
+                    "url": "https://hackage.haskell.org/package/old-locale-1.0.0.7/old-locale.cabal",
+                    "sha256": "fa998be2c7e00cd26a6e9075bea790caaf3932caa3e9497ad69bc20380dd6911"
+                },
+                {
+                    "type": "file",
+                    "path": "Makefile"
+                }
+            ],
+            "no-autogen": true
+        },
+        {
+            "name": "haskell-old-time",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://hackage.haskell.org/package/old-time-1.1.0.3/old-time-1.1.0.3.tar.gz",
+                    "sha256": "1ccb158b0f7851715d36b757c523b026ca1541e2030d02239802ba39b4112bc1"
+                },
+                {
+                    "type": "file",
+                    "url": "https://hackage.haskell.org/package/old-time-1.1.0.3/old-time.cabal",
+                    "sha256": "c91fbb3ee73d20ccd015842b30f1f29a304893ebe0ae3128b7bbc13d5bb0d4c8"
+                },
+                {
+                    "type": "file",
+                    "path": "Makefile"
+                }
+            ],
+            "no-autogen": true
+        },
+        {
+            "name": "haskell-polyparse",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://hackage.haskell.org/package/polyparse-1.12/polyparse-1.12.tar.gz",
+                    "sha256": "f54c63584ace968381de4a06bd7328b6adc3e1a74fd336e18449e0dd7650be15"
+                },
+                {
+                    "type": "file",
+                    "path": "Makefile"
+                }
+            ],
+            "no-autogen": true
+        },
+        {
+            "name": "haskell-cpphs",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://hackage.haskell.org/package/cpphs-1.20.8/cpphs-1.20.8.tar.gz",
+                    "sha256": "e56d64a7d8058e0fb63f0669397c1c861efb20a0376e0e74d86942ac151105ae"
+                },
+                {
+                    "type": "file",
+                    "path": "Makefile"
+                }
+            ],
+            "no-autogen": true
+        },
+        {
+            "name": "haskell-src-exts",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://hackage.haskell.org/package/haskell-src-exts-1.20.1/haskell-src-exts-1.20.1.tar.gz",
+                    "sha256": "48a9fffca2e44f7080526739a61eb7bc2b933dbf8efe4ab063b7092561a252cb"
+                },
+                {
+                    "type": "file",
+                    "path": "Makefile"
+                }
+            ],
+            "no-autogen": true
+        },
+        {
+            "name": "haskell-setlocale",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://hackage.haskell.org/package/setlocale-1.0.0.5/setlocale-1.0.0.5.tar.gz",
+                    "sha256": "57438491475004eda12d7a73eea0ab1c5fb28774027626e5bbcb142fe57d9ff0"
+                },
+                {
+                    "type": "file",
+                    "path": "Makefile"
+                }
+            ],
+            "no-autogen": true
+        },
+        {
+            "name": "haskell-hgettext",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://hackage.haskell.org/package/hgettext-0.1.31.0/hgettext-0.1.31.0.tar.gz",
+                    "sha256": "d51fb618f414441f573d96c1bc41fcec80976a4a80453d571683cf49e57df368"
+                },
+                {
+                    "type": "file",
+                    "path": "Makefile"
+                }
+            ],
+            "no-autogen": true
+        },
+        {
             "name": "help2man",
             "sources": [
                 {
@@ -235,7 +365,7 @@
             "buildsystem": "simple",
             "build-commands": [
                 "make install PREFIX=/app DESTDIR=/",
-                "mkdir -p $HOME/.cabal && touch $HOME/.cabal/config && cabal install --prefix=/app --flags=-hgettext"
+                "mkdir -p $HOME/.cabal && touch $HOME/.cabal/config && cabal install --prefix=/app"
             ]
         }
     ]
