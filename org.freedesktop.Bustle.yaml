@@ -182,9 +182,9 @@ modules:
   - name: bustle
     sources:
       - type: git
-        url: https://anongit.freedesktop.org/git/bustle.git
-        branch: bustle-0.6.2
-        commit: 8d28d43e84af1ca8586481b576bf1bcfedc5fea9
+        url: https://gitlab.freedesktop.org/bustle/bustle.git
+        branch: bustle-0.6.3
+        commit: e0c9f36ec9ce3d9fa2e95d1352864a5e99935a9d
     # TODO: get -j in here too
     buildsystem: simple
     build-commands:
