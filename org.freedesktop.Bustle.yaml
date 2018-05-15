@@ -16,6 +16,15 @@ finish-args:
   - --socket=system-bus
   - --socket=session-bus
   - --share=ipc
+
+  # Allow access to dconf. This is nice to have if, for example, you want to be
+  # able to launch the GTK+ Inspector, which is enabled by setting a dconf key.
+  # These four incantations are widely cargo-culted.
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+
   # No support for GtkFileChooserNative in gtk2hs, so the options are:
   # 1. Use hidden GtkFileChooserButtons and fake clicks on them
   # 2. Just expose the host FS
