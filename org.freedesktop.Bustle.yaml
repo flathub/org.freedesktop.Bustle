@@ -1,7 +1,7 @@
 # vim: sts=2 sw=2 et
 app-id: org.freedesktop.Bustle
 runtime: org.gnome.Platform
-runtime-version: "3.26"
+runtime-version: "3.28"
 sdk: org.gnome.Sdk
 # Use writable-sdk to install Haskell Platform to usr rather than app:
 # it's only needed to build Bustle, not to run it. All Haskell libraries
