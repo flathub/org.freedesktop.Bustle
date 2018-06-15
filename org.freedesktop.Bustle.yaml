@@ -178,17 +178,27 @@ modules:
     build-options:
       prefix: /usr
 
+  # https://github.com/flatpak/flatpak-xdg-utils/pull/10
+  - name: flatpak-xdg-utils
+    sources:
+      - type: git
+        url: https://github.com/flatpak/flatpak-xdg-utils.git
+        commit: a9afa997da8217bd03ece72fd04221d1597acdb3
+    cleanup:
+      - /bin/xdg-email
+      - /bin/xdg-open
+
   # fired up! ready to go!
   - name: bustle
     sources:
       - type: git
         url: https://gitlab.freedesktop.org/bustle/bustle.git
-        branch: bustle-0.6.3
-        commit: e0c9f36ec9ce3d9fa2e95d1352864a5e99935a9d
-    # TODO: get -j in here too
+        branch: bustle-0.7.1
+        commit: ee0aba5131884e536eafd878ef6fba2316c82b93
+      - type: file
+        path: Makefile
+        dest-filename: Makefile-flatpak
     buildsystem: simple
     build-commands:
       - make install PREFIX=/app DESTDIR=/
-      - mkdir -p $HOME/.cabal &&
-        touch $HOME/.cabal/config &&
-        cabal install --prefix=/app --flags=-hgettext
+      - make -f Makefile-flatpak EXTRA='--prefix=/app --flags=-hgettext'
