@@ -5,7 +5,6 @@ Someone's favourite D-Bus profiler, now available on someone's favourite app dis
 ## Building and testing locally
 
 ```console
-$ rm -rf _build && \
-  flatpak-builder --install --user _build org.freedesktop.Bustle.yaml && \
+$ flatpak-builder --install --user --force-clean _build org.freedesktop.Bustle.yaml && \
   flatpak run org.freedesktop.Bustle//master
 ```
