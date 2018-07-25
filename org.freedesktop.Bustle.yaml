@@ -195,10 +195,9 @@ modules:
   # fired up! ready to go!
   - name: bustle
     sources:
-      - type: git
-        url: https://gitlab.freedesktop.org/bustle/bustle.git
-        branch: bustle-0.7.1
-        commit: ee0aba5131884e536eafd878ef6fba2316c82b93
+      - type: archive
+        url: https://www.freedesktop.org/software/bustle/0.7.2/bustle-0.7.2.tar.gz
+        sha256: 07a581bb14b77b74b2d42dbfe266d631bbc6cb454203de335569649c83a31325
       - type: file
         path: Makefile
         dest-filename: Makefile-flatpak
