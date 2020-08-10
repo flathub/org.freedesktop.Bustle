@@ -1,0 +1,34 @@
+{
+  "base":
+  {
+    "app-id": "org.freedesktop.Bustle",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "19.08",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "bustle",
+    "finish-args": [
+      "--socket=x11",
+      "--socket=wayland",
+      "--socket=system-bus",
+      "--socket=session-bus",
+      "--filesystem=host"
+    ],
+    "cleanup": [],
+    "cleanup-commands": [
+      "find /app/share/ -type f -not -ipath '*bustle*' -delete"
+    ],
+    "modules": [
+      "libpcap.json",
+      "help2man.json"
+    ]
+  },
+  "main-package": "bustle",
+  "//": [
+    "-j",
+    "--force-reinstalls"
+  ],
+  "cabal-configure-options": [
+    "--extra-include-dirs=/app/include",
+    "--extra-lib-dirs=/app/lib'
+  ]
+}
