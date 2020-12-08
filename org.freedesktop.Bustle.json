@@ -4,8 +4,8 @@
     "command": "bustle",
     "cleanup": [
         "/lib/ghc-8.6.5",
-        "/lib/x86_64-linux-ghc-8.6.5",
-        "/share/doc/x86_64-linux-ghc-8.6.5",
+        "/lib/*64-linux-ghc-8.6.5",
+        "/share/doc/*64-linux-ghc-8.6.5",
         "/bin/alex",
         "/bin/happy",
         "/bin/gtk2hs*"
@@ -13,12 +13,9 @@
     "cleanup-commands": [
       "find /app/share/ -maxdepth 2 -mindepth 2 -type d -path '*ghc*' -not -path '*bustle*' -exec rm -r {} +"
     ],
-    "runtime-version": "19.08",
+    "runtime-version": "20.08",
     "modules": [
         {
-            "only-arches": [
-                "x86_64"
-            ],
             "cleanup": [
                 "/bin/ghc",
                 "/bin/ghc-8.6.5",
@@ -44,16 +41,23 @@
                 {
                     "url": "https://downloads.haskell.org/ghc/8.6.5/ghc-8.6.5-x86_64-deb9-linux.tar.xz",
                     "type": "archive",
-                    "sha256": "bc75f5601a9f41d58b2ba161b9e28fad52143a7229060f1e084168d9b2e914df"
+                    "sha256": "bc75f5601a9f41d58b2ba161b9e28fad52143a7229060f1e084168d9b2e914df",
+		    "only-arches": [ "x86_64" ]
+                },
+                {
+                    "url": "https://downloads.haskell.org/ghc/8.6.5/ghc-8.6.5-aarch64-ubuntu18.04-linux.tar.xz",
+                    "type": "archive",
+                    "sha256": "1852589037e4b2805ab517bc430e25a3125c4a118a1674ffefbb443394a0c786",
+                    "only-arches": [ "aarch64" ]
                 }
             ],
             "build-commands": [
                 "mkdir -p /app/lib",
-                "ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so /app/lib/libtinfo.so.5",
+                "ln -s /usr/lib/${FLATPAK_ARCH}-linux-gnu/libtinfo.so /app/lib/libtinfo.so.5",
                 "./configure --prefix=/app",
                 "make install"
             ],
-            "name": "ghc-8.6.5-x86_64",
+            "name": "ghc-8.6.5",
             "buildsystem": "simple",
             "builddir": false
         },
