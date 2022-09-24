@@ -4,6 +4,9 @@
     "runtime-version": "22.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "bustle",
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.llvm14"
+    ],
     "finish-args": [
         "--socket=x11",
         "--socket=wayland",
@@ -22,6 +25,10 @@
     "cleanup-commands": [
       "find /app/share/ -maxdepth 2 -mindepth 2 -type d -path '*ghc*' -not -path '*bustle*' -exec rm -r {} +"
     ],
+    "build-options":{
+        "append-path": "/usr/lib/sdk/llvm14/bin",
+        "prepend-ld-library-path": "/usr/lib/sdk/llvm14/lib"
+    },
     "modules": [
         {
             "name": "ghc-8.6.5",
