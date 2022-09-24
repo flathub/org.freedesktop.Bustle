@@ -1,7 +1,16 @@
 {
+    "app-id": "org.freedesktop.Bustle",
     "runtime": "org.freedesktop.Platform",
+    "runtime-version": "22.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "bustle",
+    "finish-args": [
+        "--socket=x11",
+        "--socket=wayland",
+        "--socket=system-bus",
+        "--socket=session-bus",
+        "--filesystem=host"
+    ],
     "cleanup": [
         "/lib/ghc-8.6.5",
         "/lib/*64-linux-ghc-8.6.5",
@@ -13,9 +22,17 @@
     "cleanup-commands": [
       "find /app/share/ -maxdepth 2 -mindepth 2 -type d -path '*ghc*' -not -path '*bustle*' -exec rm -r {} +"
     ],
-    "runtime-version": "20.08",
     "modules": [
         {
+            "name": "ghc-8.6.5",
+            "buildsystem": "simple",
+            "builddir": false,
+            "build-commands": [
+                "mkdir -p /app/lib",
+                "ln -s /usr/lib/${FLATPAK_ARCH}-linux-gnu/libtinfo.so /app/lib/libtinfo.so.5",
+                "./configure --prefix=/app",
+                "make install"
+            ],
             "cleanup": [
                 "/bin/ghc",
                 "/bin/ghc-8.6.5",
@@ -50,20 +67,23 @@
                     "sha256": "1852589037e4b2805ab517bc430e25a3125c4a118a1674ffefbb443394a0c786",
                     "only-arches": [ "aarch64" ]
                 }
-            ],
-            "build-commands": [
-                "mkdir -p /app/lib",
-                "ln -s /usr/lib/${FLATPAK_ARCH}-linux-gnu/libtinfo.so /app/lib/libtinfo.so.5",
-                "./configure --prefix=/app",
-                "make install"
-            ],
-            "name": "ghc-8.6.5",
-            "buildsystem": "simple",
-            "builddir": false
+            ]
         },
         "libpcap.json",
         "help2man.json",
         {
+            "name": "alex",
+            "buildsystem": "simple",
+            "builddir": false,
+            "build-commands": [
+                "echo '#! /usr/bin/env runhaskell' >Setup.txt",
+                "echo '> import Distribution.Simple' >>Setup.txt",
+                "echo '> main = defaultMain' >>Setup.txt",
+                "ln -s Setup.txt Setup.lhs || true",
+                "runhaskell Setup configure --prefix=/app --extra-include-dirs=/app/include --extra-lib-dirs=/app/lib",
+                "runhaskell Setup build",
+                "runhaskell Setup install"
+            ],
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/alex-3.2.5/alex-3.2.5.tar.gz",
@@ -76,7 +96,12 @@
                     "type": "file",
                     "sha256": "af0c4aac67849d8b35e8c16063517642a5c6b809d09fdb040ed9369f91cb26fb"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "happy",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -86,11 +111,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "alex",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/happy-1.19.12/happy-1.19.12.tar.gz",
@@ -103,19 +123,7 @@
                     "type": "file",
                     "sha256": "acc67bfbf3af87892766781dd064c9447181ea81269a7a1e5fc9ace4a8fa4768"
                 }
-            ],
-            "build-commands": [
-                "echo '#! /usr/bin/env runhaskell' >Setup.txt",
-                "echo '> import Distribution.Simple' >>Setup.txt",
-                "echo '> main = defaultMain' >>Setup.txt",
-                "ln -s Setup.txt Setup.lhs || true",
-                "runhaskell Setup configure --prefix=/app --extra-include-dirs=/app/include --extra-lib-dirs=/app/lib",
-                "runhaskell Setup build",
-                "runhaskell Setup install"
-            ],
-            "name": "happy",
-            "buildsystem": "simple",
-            "builddir": false
+            ]
         },
         {
             "sources": [
@@ -145,6 +153,18 @@
             "builddir": false
         },
         {
+            "name": "primitive",
+            "buildsystem": "simple",
+            "builddir": false,
+            "build-commands": [
+                "echo '#! /usr/bin/env runhaskell' >Setup.txt",
+                "echo '> import Distribution.Simple' >>Setup.txt",
+                "echo '> main = defaultMain' >>Setup.txt",
+                "ln -s Setup.txt Setup.lhs || true",
+                "runhaskell Setup configure --prefix=/app --extra-include-dirs=/app/include --extra-lib-dirs=/app/lib",
+                "runhaskell Setup build",
+                "runhaskell Setup install"
+            ],
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/primitive-0.7.1.0/primitive-0.7.1.0.tar.gz",
@@ -157,7 +177,12 @@
                     "type": "file",
                     "sha256": "6a237bb338bcc43193077ff8e8c0f0ce2de14c652231496a15672e8b563a07e2"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "vector",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -167,11 +192,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "primitive",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/vector-0.12.1.2/vector-0.12.1.2.tar.gz",
@@ -184,7 +204,12 @@
                     "type": "file",
                     "sha256": "9291bc581f36e51d5bda9fce57cb980fbec3dd292996896f285fef39eb80a9a0"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "hashtables",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -194,11 +219,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "vector",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/hashtables-1.2.3.4/hashtables-1.2.3.4.tar.gz",
@@ -211,7 +231,12 @@
                     "type": "file",
                     "sha256": "16a77784ba31ce90cfaab198b42a888fd30d838f9fd581c0efc5b7ee6dfe458f"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "splitmix",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -221,11 +246,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "hashtables",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/splitmix-0.1/splitmix-0.1.tar.gz",
@@ -238,7 +258,12 @@
                     "type": "file",
                     "sha256": "d50c4d0801a35be7875a040470c09863342514930c82a7d25780a6c2efc4fda9"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "random",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -248,11 +273,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "splitmix",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/random-1.2.0/random-1.2.0.tar.gz",
@@ -265,7 +285,12 @@
                     "type": "file",
                     "sha256": "5ca8674e95c46c7eb90f520c26aea22d403625c97697275434afba66ebd32b05"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "gtk2hs-buildtools",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -275,16 +300,11 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "random",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
-                    "url": "https://hackage.haskell.org/package/gtk2hs-buildtools-0.13.8.0/gtk2hs-buildtools-0.13.8.0.tar.gz",
+                    "url": "https://hackage.haskell.org/package/gtk2hs-buildtools-0.13.8.3/gtk2hs-buildtools-0.13.8.3.tar.gz",
                     "type": "archive",
-                    "sha256": "8dbb7dbf004e45e48aa77153bc780120d99a329c6bde76618d46b2a4f3bb8598"
+                    "sha256": "3b0344e4ce5774ca50f0fa5e0c930f282ca84c50317e6f1148325528c6069539"
                 },
                 {
                     "dest-filename": "gtk2hs-buildtools.cabal",
@@ -292,7 +312,12 @@
                     "type": "file",
                     "sha256": "132f38155fc677430a47ea750918973161c876fb6f281d342ac2f07eb99229ce"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "utf8-string",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -302,11 +327,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "gtk2hs-buildtools",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/utf8-string-1.0.1.1/utf8-string-1.0.1.1.tar.gz",
@@ -319,7 +339,12 @@
                     "type": "file",
                     "sha256": "68cc6cf665e7212334a51b63d6936daeaca023b2cfe8637d130acfe95f91700b"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "cairo",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -329,11 +354,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "utf8-string",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/cairo-0.13.8.1/cairo-0.13.8.1.tar.gz",
@@ -346,7 +366,12 @@
                     "type": "file",
                     "sha256": "1938aaeb5d3504678d995774dfe870f6b66cbd43d336b692fa8779b23b2b67a9"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "glib",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -356,11 +381,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "cairo",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/glib-0.13.8.1/glib-0.13.8.1.tar.gz",
@@ -373,7 +393,12 @@
                     "type": "file",
                     "sha256": "42670daf0c85309281e08ba8559df75daa2e3be642e79fdfa781bef5e59658b0"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "gio",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -383,11 +408,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "glib",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/gio-0.13.8.1/gio-0.13.8.1.tar.gz",
@@ -400,7 +420,12 @@
                     "type": "file",
                     "sha256": "7404841eefdfffb50c2b5f63879ffe4bf40fb5ddf90a7f633494eca0e23150a5"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "pango",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -410,11 +435,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "gio",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/pango-0.13.8.1/pango-0.13.8.1.tar.gz",
@@ -427,7 +447,12 @@
                     "type": "file",
                     "sha256": "877b121c0bf87c96d3619effae6751ecfd74b7f7f3227cf3fde012597aed5ed9"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "gtk3",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -437,11 +462,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "pango",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/gtk3-0.15.5/gtk3-0.15.5.tar.gz",
@@ -454,7 +474,12 @@
                     "type": "file",
                     "sha256": "e036fe5df496fbefff9e1bc029358ba198b4b73bb4677d3f58e59ee6ec03766a"
                 }
-            ],
+            ]
+        },
+        {
+            "name": "bustle",
+            "buildsystem": "simple",
+            "builddir": false,
             "build-commands": [
                 "echo '#! /usr/bin/env runhaskell' >Setup.txt",
                 "echo '> import Distribution.Simple' >>Setup.txt",
@@ -464,11 +489,6 @@
                 "runhaskell Setup build",
                 "runhaskell Setup install"
             ],
-            "name": "gtk3",
-            "buildsystem": "simple",
-            "builddir": false
-        },
-        {
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/bustle-0.8.0/bustle-0.8.0.tar.gz",
@@ -481,41 +501,21 @@
                     "type": "file",
                     "sha256": "d95850cec27147de8a2d6471a7a7a74f52b738783e699be4b8cc6f435d1837e5"
                 }
-            ],
-            "build-commands": [
-                "echo '#! /usr/bin/env runhaskell' >Setup.txt",
-                "echo '> import Distribution.Simple' >>Setup.txt",
-                "echo '> main = defaultMain' >>Setup.txt",
-                "ln -s Setup.txt Setup.lhs || true",
-                "runhaskell Setup configure --prefix=/app --extra-include-dirs=/app/include --extra-lib-dirs=/app/lib",
-                "runhaskell Setup build",
-                "runhaskell Setup install"
-            ],
-            "name": "bustle",
-            "buildsystem": "simple",
-            "builddir": false
+            ]
         },
         {
+            "name": "bustle-c",
+            "buildsystem": "simple",
+            "build-commands": [
+                "make install PREFIX=/app DESTDIR=/"
+            ],
             "sources": [
                 {
                     "url": "https://hackage.haskell.org/package/bustle-0.8.0/bustle-0.8.0.tar.gz",
                     "type": "archive",
                     "sha256": "2fb3e9d9a97db3cd9a3ce763e86947b642bd7733b46206177a1677f08726573c"
                 }
-            ],
-            "name": "bustle-c",
-            "buildsystem": "simple",
-            "build-commands": [
-                "make install PREFIX=/app DESTDIR=/"
             ]
         }
-    ],
-    "app-id": "org.freedesktop.Bustle",
-    "finish-args": [
-        "--socket=x11",
-        "--socket=wayland",
-        "--socket=system-bus",
-        "--socket=session-bus",
-        "--filesystem=host"
     ]
 }
