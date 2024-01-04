@@ -61,9 +61,9 @@
             ],
             "sources": [
                 {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/gtk.git",
-                    "commit": "0b861cf159472b738dc62e45525e95f5cd3c7f19"
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gtk/4.13/gtk-4.13.4.tar.xz",
+                    "sha256": "b31c7511023a2ce0a5144b3b6b72221feb563e23be164ecddd487ca859b9c40f"
                 }
             ]
         },
