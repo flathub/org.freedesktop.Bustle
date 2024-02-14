@@ -4,8 +4,7 @@
     "runtime-version": "45",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
-        "org.freedesktop.Sdk.Extension.rust-stable",
-        "org.freedesktop.Sdk.Extension.llvm16"
+        "org.freedesktop.Sdk.Extension.rust-stable"
     ],
     "command": "bustle",
     "finish-args": [
@@ -16,13 +15,7 @@
         "--socket=wayland"
     ],
     "build-options": {
-        "append-path": "/usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/llvm16/bin",
-        "env": {
-            "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER": "clang",
-            "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAGS": "-C link-arg=-fuse-ld=/usr/lib/sdk/rust-stable/bin/mold",
-            "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER": "clang",
-            "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_RUSTFLAGS": "-C link-arg=-fuse-ld=/usr/lib/sdk/rust-stable/bin/mold"
-        }
+        "append-path": "/usr/lib/sdk/rust-stable/bin"
     },
     "modules": [
         {
@@ -68,9 +61,20 @@
             ],
             "sources": [
                 {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/gtk.git",
-                    "commit": "0b861cf159472b738dc62e45525e95f5cd3c7f19"
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gtk/4.13/gtk-4.13.4.tar.xz",
+                    "sha256": "b31c7511023a2ce0a5144b3b6b72221feb563e23be164ecddd487ca859b9c40f"
+                }
+            ]
+        },
+        {
+            "name": "libadwaita",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libadwaita/1.5/libadwaita-1.5.beta.tar.xz",
+                    "sha256": "0aaf5eff76321977c1a592de05e3a0e9dffb9cc60eaac1dd8830c04fed484dfe"
                 }
             ]
         },
@@ -80,8 +84,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.gnome.org/msandova/bustle/uploads/6c18f7fa30d79f0a6b12f6c852782784/bustle-0.9.0.tar.xz",
-                    "sha256": "8cc5b71d2614367884d152dd43048e3977334fdc447327d95b7bca77b01f63ee"
+                    "url": "https://gitlab.gnome.org/World/bustle/uploads/73f02b601e80aa5456dcae213285985e/bustle-0.9.1.tar.xz",
+                    "sha256": "94e1082a2f18b4b729af27694e44e3e8b8d7227b60ed03d5f79fd14143e768ef"
                 }
             ]
         }
