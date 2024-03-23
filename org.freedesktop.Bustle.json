@@ -1,7 +1,7 @@
 {
     "id": "org.freedesktop.Bustle",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "45",
+    "runtime-version": "46",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -19,73 +19,13 @@
     },
     "modules": [
         {
-            "name": "libsass",
-            "buildsystem": "meson",
-            "cleanup": [
-                "*"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/lazka/libsass.git",
-                    "commit": "302397c0c8ae2d7ab02f45ea461c2c3d768f248e"
-                }
-            ]
-        },
-        {
-            "name": "sassc",
-            "buildsystem": "meson",
-            "cleanup": [
-                "*"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/lazka/sassc.git",
-                    "commit": "82803377c33247265d779af034eceb5949e78354"
-                }
-            ]
-        },
-        {
-            "name": "gtk",
-            "buildsystem": "meson",
-            "config-opts": [
-                "-Dintrospection=disabled",
-                "-Ddemos=false",
-                "-Dbuild-testsuite=false",
-                "-Dbuild-examples=false",
-                "-Dbuild-tests=false"
-            ],
-            "cleanup": [
-                "/bin/*"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gtk/4.13/gtk-4.13.4.tar.xz",
-                    "sha256": "b31c7511023a2ce0a5144b3b6b72221feb563e23be164ecddd487ca859b9c40f"
-                }
-            ]
-        },
-        {
-            "name": "libadwaita",
-            "buildsystem": "meson",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/libadwaita/1.5/libadwaita-1.5.beta.tar.xz",
-                    "sha256": "0aaf5eff76321977c1a592de05e3a0e9dffb9cc60eaac1dd8830c04fed484dfe"
-                }
-            ]
-        },
-        {
             "name": "bustle",
             "buildsystem": "meson",
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.gnome.org/World/bustle/uploads/73f02b601e80aa5456dcae213285985e/bustle-0.9.1.tar.xz",
-                    "sha256": "94e1082a2f18b4b729af27694e44e3e8b8d7227b60ed03d5f79fd14143e768ef"
+                    "url": "https://gitlab.gnome.org/World/bustle/uploads/db6c5e58ab1b145d8dd161df963615c8/bustle-0.9.2.tar.xz",
+                    "sha256": "be67a58c2e9068e3d3b523d1f1f05a47e84f3afeebff0ac6faff23e0ddcded2f"
                 }
             ]
         }
