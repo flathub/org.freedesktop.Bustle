@@ -24,8 +24,14 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.gnome.org/-/project/26802/uploads/0906afc8cd064e981ccf68a426b42bd7/bustle-0.11.0.tar.xz",
-                    "sha256": "aad2f6f7f70bb6a532ed613839a1ae2c9f7ba6e3a8e110f38e87ae098cd1e789"
+                    "url": "https://gitlab.gnome.org/World/bustle/-/releases/0.12.0/downloads/bustle-0.12.0.tar.xz",
+                    "sha256": "b1c6217e4fc859eb69ac931d38b97b805b8d5b21fd1334d9a1be98606b189ee1",
+                    "x-checker-data": {
+                        "type": "json",
+                        "url": "https://gitlab.gnome.org/api/v4/projects/26802/releases/",
+                        "version-query": ".[0].tag_name",
+                        "url-query": ".[0].assets.links.[] | select(.name == \"bustle-\" + $version + \".tar.xz\") | .direct_asset_url"
+                    }
                 }
             ]
         }
