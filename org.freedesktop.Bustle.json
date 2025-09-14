@@ -1,7 +1,7 @@
 {
     "id": "org.freedesktop.Bustle",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "48",
+    "runtime-version": "49",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -24,8 +24,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.gnome.org/World/bustle/-/releases/0.12.0/downloads/bustle-0.12.0.tar.xz",
-                    "sha256": "b1c6217e4fc859eb69ac931d38b97b805b8d5b21fd1334d9a1be98606b189ee1",
+                    "url": "https://gitlab.gnome.org/World/bustle/-/releases/0.13.0/downloads/bustle-0.13.0.tar.xz",
+                    "sha256": "e252491145c4097f4310ca67c2816edf67f46c5cfeb3ca8670439e54e804f30a",
                     "x-checker-data": {
                         "type": "json",
                         "url": "https://gitlab.gnome.org/api/v4/projects/26802/releases/",
